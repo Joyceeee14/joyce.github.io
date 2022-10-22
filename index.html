@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css ">
+    <script src="https://cdn.staticfile.org/vue/2.6.9/vue.js"></script>
+
+</head>
+<body>
+    <div id="app" class="container">
+        <img src="./cropped-cropped-logo-1024x919.jpg" alt="logo">
+        <!-- 定义Panel for 注册界面，点login 和 register 页面互相转换 先定义块元素 -->
+        <div class="panel">
+            <div class="content login">
+                <div class="switch">
+                    <span :class='{"active":active === "login"}' @click="go('login')">Login</span>
+                    <span>/</span>
+                    <span :class='{"active":active === "register"}' @click="go('register')">register</span>
+                </div>
+                <div class="form" id="fromLogin">
+                    <!-- 如果按钮选择的是注册就展示这个里面的内容 -->
+                    <template v-if="active === 'register'">
+                        <div class="input">
+                            <input :class="{hasValue : registerForm.Email}" v-model="registerForm.Email" type="text" name="Email" id="email">
+                            <label for="Email">Email</label>
+                        </div>
+                        <div class="input">
+                            <input :class="{hasValue : registerForm.Username}" v-model="registerForm.Username" type="text" name="Username" id="Username">
+                            <label for="Email">Username</label>
+                        </div>
+                        <div class="input">
+                            <input :class="{hasValue : registerForm.Password}" v-model="registerForm.Password" type="text" name="Password" id="Password">
+                            <label for="Email">Password</label>
+                        </div>
+                        <div class="input">
+                            <input :class="{hasValue : registerForm.repeat}" v-model="registerForm.repeat" type="text" name="Passwordrepeat" id="Passwordrepeat">
+                            <label for="Email">Repeat Password</label>
+                        </div>
+                    </template>
+                    <!-- 如果按钮选择的是登录就展示这个里面的内容 -->                
+                    <template v-if="active === 'login'">
+                        <div class="input">
+                            <input :class="{hasValue : loginForm.Username}" v-model="loginForm.Username" type="text" name="Username" id="Username">
+                            <label for="Email">Username</label>
+                        </div>
+                        <div class="input">
+                            <input :class="{hasValue : loginForm.Password}" v-model="loginForm.Password" type="text" name="Password" id="Password">
+                            <label for="email">Password</label>
+                        </div>
+                    </template>
+                    <span>Forget Password?</span>
+                    <button type="submit" @click="submit">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            active :'login',
+            registerForm:{
+                email : '',
+                Username : '',
+                Password : '',
+                repeat : ''
+            },
+            loginForm :{
+                Username : '',
+                Password : ''
+            }
+        },
+        methods: {
+            go(type){
+                this.active = type;
+            },
+            submit(){
+                if(type === 'login'){
+                    console.log('login',this.loginForm)
+                }
+                if(type === 'register'){
+                    console.log('register',this.registerForm)
+                }
+            }
+        }
+    })
+</script>
+</html>
